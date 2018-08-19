@@ -1,5 +1,4 @@
 import os
-import sqlite3
 
 from flask import Flask, jsonify, abort, make_response, render_template, redirect
 
@@ -25,6 +24,10 @@ def root():
 @app.route('/home/<name>')
 def home(name=None):
 	return render_template('home.html', name=name)
+
+@app.route('/elevations/')
+def home(name=None):
+	return render_template('elevations.html', data=data)
 
 
 if __name__ == '__main__':
