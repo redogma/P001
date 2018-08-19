@@ -4,10 +4,21 @@ from flask import Flask, jsonify, abort, make_response, render_template, redirec
 
 app = Flask(__name__)
 
+@app.errorhandler(404)
+def not_found(error):
+	return make_response(jsonify({'error': '404 - Not found'}), 404)
+
+@app.errorhandler(500)
+def error_500(error):
+	return make_response(jsonify({'error': '500 - Internal application error'}), 500)
+
 @app.route('/')
-@app.route('/test')
+def index():
+	return redirect('/home/')
+	
+@app.route('/healthcheck')
 def root():
-    return 'P001!'
+    return 'Healthcheck'
 
 @app.route('/home/')
 @app.route('/home/<name>')
