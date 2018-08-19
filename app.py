@@ -1,4 +1,5 @@
 import os
+import sqlite3
 
 from flask import Flask, jsonify, abort, make_response, render_template, redirect
 
@@ -15,7 +16,7 @@ def error_500(error):
 @app.route('/')
 def index():
 	return redirect('/home/')
-	
+
 @app.route('/healthcheck')
 def root():
     return 'Healthcheck'
