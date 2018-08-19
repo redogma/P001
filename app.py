@@ -27,7 +27,9 @@ def home(name=None):
 
 @app.route('/elevations/')
 def elevations(name=None):
-	return render_template('elevations.html', data=data)
+	data=[{'pos': 1 ,'elevation': 52, 'run': 'Test'}]
+	filter=None
+	return render_template('elevations.html', filter=filter, data=data,count=len(data))
 
 
 if __name__ == '__main__':

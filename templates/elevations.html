@@ -2,26 +2,26 @@
 <head>
 <link href="/static/mystyle.css" rel="stylesheet" type="text/css">
 </head>
-<title>myApp - Elevations</title>
+<title>P001 - Elevations</title>
 
 <div class="topnav">
 	<a href="/home">Home</a>
 	<a href="/tasks">Tasks</a>
 	<a href="/person">Person</a>
 	<a href="/parkrun">Parkrun</a>
-	<a class="active", href="/elevations">Elevations</a>	
+	<a class="active", href="/elevations">Elevations</a>
 	</div>
 
-<h2>Number of runs listed: {{ count}}</h2> 	
-{% if run %}<h2> (filter: {{ run }})</h2>	{% endif %}
+<h2>Number of runs listed: {{ count}}</h2>
+{% if filter %}<h2> (filter: {{ filter }})</h2>	{% endif %}
 <table id='table1' width="80%">
-		<tr>		
+		<tr>
 			<th width="5%" align="centre">#</th>
 			<th width="90%" align="left">Run</th>
 			<th width="5%" align="center">Elevation</th>
 		</tr>
 		{% for item in data %}
-				<tr>				
+				<tr>
 					<td align="center">{{ item.pos }}</td>
 					<td>{{ item.run }}</td>
 					<td align="right">{{ item.elevation }}</td>
