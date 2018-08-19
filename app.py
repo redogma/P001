@@ -26,7 +26,7 @@ def home(name=None):
 	return render_template('home.html', name=name)
 
 @app.route('/elevations/')
-def home(name=None):
+def elevations(name=None):
 	return render_template('elevations.html', data=data)
 
 
