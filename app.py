@@ -3,6 +3,7 @@ import os
 from flask import Flask, jsonify, abort, make_response, render_template, redirect
 
 app = Flask(__name__)
+APP_NAME = os.environ['APP_NAME']
 
 @app.errorhandler(404)
 def not_found(error):
@@ -18,7 +19,7 @@ def index():
 
 @app.route('/healthcheck')
 def root():
-    return 'Healthcheck'
+    return 'Healthcheck %s' % (APP_NAME,)
 
 @app.route('/home/')
 @app.route('/home/<name>')
