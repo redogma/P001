@@ -7,7 +7,7 @@ app = Flask(__name__)
 APP_NAME = os.environ['APP_NAME']
 
 @app.errorhandler(404)
-def not_found(error):
+def error_404(error):
 	return make_response(jsonify({'error': '404 - Not found'}), 404)
 
 @app.errorhandler(500)
@@ -26,6 +26,18 @@ def root():
 @app.route('/home/<name>')
 def home(name=None):
 	return render_template('home.html', name=name)
+
+@app.route('/parkruns/')
+@app.route('/parkruns/<filter>')
+def parkruns(filter=None):
+	data=[{'Run Date': '01-Feb-2018' ,
+			'Run Number': 1, 
+			'Pos': 37,
+			'Time': '30:13',
+			'Age Grade': '49.78',
+			'PB?': 'PB'}]
+	title='parkruns'
+	return render_template('parkruns.html', title=title, filter=filter, data=data,count=len(data))
 
 @app.route('/elevations/')
 def elevations(name=None):
