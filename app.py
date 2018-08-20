@@ -1,10 +1,25 @@
 import os
 import json
+from dateutil import parser
 
 from flask import Flask, jsonify, abort, make_response, render_template, redirect
 
 app = Flask(__name__)
 APP_NAME = os.environ['APP_NAME']
+
+@app.template_filter()
+def datetimefilter(value, format='%d-%b-%Y'):
+
+	"""convert a datetime to a different format."""
+	try:
+		dt = parser.parse(value, dayfirst=True)
+		response = dt.strftime(format)
+	except:
+		response = value
+	return response
+	
+app.jinja_env.filters['datetimefilter'] = datetimefilter
+
 
 @app.errorhandler(404)
 def error_404(error):
