@@ -2,14 +2,19 @@ import psycopg2
 import os
 from urllib.parse import urlparse
 
-#urlparse.uses_netloc.append('postgres')
-url = urlparse(os.environ['DATABASE_URL'])
+def connect():
+    url = urlparse(os.environ['DATABASE_URL'])
 
-conn = psycopg2.connect("dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname))
-conn.set_isolation_level(0)
-cur = conn.cursor()
 
-queries = ["""
+    conn = psycopg2.connect("dbname=%s user=%s password=%s host=%s " % (url.path[1:], url.username, url.password, url.hostname))
+    conn.set_isolation_level(0)
+    cur = conn.cursor()
+
+    return conn, cur
+
+def create_tables():
+    conn, cur = connect()
+    queries = ["""
             CREATE TABLE elevation (e_id INTEGER PRIMARY KEY, e_pos INTEGER, e_name VARCHAR(100), e_elevation INTEGER)
             """,
            """
@@ -31,9 +36,15 @@ queries = ["""
               INSERT INTO run VALUES (1,\'Test\', \'30:01\')
            """
           ]
-for q in queries:
-  print('** Starting: %s' % (q,))
-  cur.execute(q)
+    for q in queries:
+       print('** Starting: %s' % (q,))
+       cur.execute(q)
 
-print('** Finished running queries')
-conn.commit()  
+    print('** Finished running queries')
+    conn.commit()
+    cur.close()
+    conn.close()
+    print('** Closing connection')
+            
+if __name__ == '__main__':
+    pass            
