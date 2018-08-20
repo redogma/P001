@@ -18,7 +18,7 @@ queries = ["""
            """
              CREATE TABLE reference (ref_id SERIAL PRIMARY KEY, 
                                      ref_key VARCHAR(20), 
-                                     ref_value BLOB, 
+                                     ref_value BYTEA, 
                                      ref_modified_date VARCHAR(30))
            """,
            """
