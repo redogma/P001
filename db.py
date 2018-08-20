@@ -1,6 +1,8 @@
 import psycopg2
 import os
 from urllib.parse import urlparse
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
 def connect():
     url = urlparse(os.environ['DATABASE_URL'])
@@ -11,6 +13,25 @@ def connect():
     cur = conn.cursor()
 
     return conn, cur
+    
+def get_elevations():
+	url = 'https://jegmar.com/stats-hq/fastest-races/parkrun'
+	print('** Getting external data')
+	html = urlopen(url)
+	
+	soup = BeautifulSoup(html, 'html5lib')
+	
+	tr = soup.find_all('tr')
+	
+	runs =[]
+	for row in tr: #[0:10]:
+		line = ''
+		for cell in row.find_all(['th','td'],class_=['column-1','column-2', 'column-4']):
+			line = line + ',' + cell.get_text().strip()
+		elements = line[1:].split(',')
+		runs.append ({'pos': elements[0], 'run': elements[1], 'elevation': elements[2]})
+
+	return runs[1:]
 
 def create_tables():
     conn, cur = connect()
