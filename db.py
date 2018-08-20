@@ -1,4 +1,3 @@
-
 import psycopg2
 import os
 from urllib.parse import urlparse
@@ -17,7 +16,7 @@ queries = ["""
             CREATE TABLE run (r_id INTEGER, r_name VARCHAR(255), r_result VARCHAR(20))
            """
           ]
-for q in queries
+for q in queries:
   cur.execute(query)
 
 conn.commit()  
