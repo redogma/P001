@@ -17,6 +17,6 @@ queries = ["""
            """
           ]
 for q in queries:
-  cur.execute(query)
+  cur.execute(q)
 
 conn.commit()  
