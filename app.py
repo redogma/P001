@@ -30,7 +30,7 @@ def home(name=None):
 @app.route('/parkruns/')
 @app.route('/parkruns/<filter>')
 def parkruns(filter=None):
-	data=[{'Run Date': '01-Feb-2018' ,
+	data=[{'Run Date': '01-Feb-2018',
 			'Run Number': 1, 
 			'Pos': 37,
 			'Time': '30:13',
