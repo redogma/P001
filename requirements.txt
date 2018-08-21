@@ -3,4 +3,3 @@ Jinja2==2.9.6
 psycopg2==2.7.*
 python-dateutil==2.7.3
 beautifulsoup4==4.6.3
-html5lib==*.*.*
