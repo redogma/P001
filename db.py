@@ -13,7 +13,18 @@ def connect():
     cur = conn.cursor()
 
     return conn, cur
-    
+
+def save_elevations(value):
+    print('** Saving elevations to reference table')	
+    conn, cur = connect()
+    sql = 'INSERT INTO reference (ref_key, ref value) values (\'elevations\',' + str(value) + '\')'
+    cur.execute(sql)
+    conn.commit()
+    cur.close()
+    conn.close()
+    print('** Closing connection')
+
+
 def get_elevations():
 	url = 'https://jegmar.com/stats-hq/fastest-races/parkrun'
 	print('** Getting external data')
